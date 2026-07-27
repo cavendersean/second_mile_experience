@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Second Mile Experience</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Segoe UI,Arial,sans-serif;
+    background:#002b64;
+    color:white;
+}
+
+.header{
+    background:#001d46;
+    padding:20px;
+    text-align:center;
+    box-shadow:0 2px 10px rgba(0,0,0,.3);
+}
+
+.header h1{
+    margin:0;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+
+.welcome{
+    background:#0b3f82;
+    border-radius:15px;
+    padding:20px;
+    margin-bottom:20px;
+}
+
+.stats{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+.stat{
+    background:#114e9e;
+    padding:15px;
+    border-radius:10px;
+    flex:1;
+    min-width:180px;
+}
+
+label{
+    display:block;
+    margin-top:15px;
+    font-weight:bold;
+}
+
+input,textarea{
+    width:100%;
+    padding:12px;
+    border-radius:8px;
+    border:none;
+    margin-top:5px;
+}
+
+.tiles{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+    margin-top:25px;
+}
+
+.tile{
+    background:#0b3f82;
+    border-radius:15px;
+    padding:20px;
+    cursor:pointer;
+    transition:.2s;
+    border:2px solid transparent;
+}
+
+.tile:hover{
+    border-color:#48d8ff;
+}
+
+.tile.selected{
+    border-color:#48d8ff;
+    background:#145cae;
+}
+
+.tile h3{
+    margin-top:0;
+}
+
+button{
+    margin-top:20px;
+    background:#48d8ff;
+    color:#002b64;
+    border:none;
+    padding:15px 25px;
+    border-radius:10px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+#success{
+    display:none;
+    background:#1a7f37;
+    margin-top:20px;
+    padding:15px;
+    border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1>Second Mile Experience</h1>
+</div>
+
+<div class="container">
+
+<div class="welcome">
+<h2>Welcome Back Scott!</h2>
+
+<div class="stats">
+<div class="stat">
+<b>Member For</b><br>
+25 Years
+</div>
+
+<div class="stat">
+<b>Total Washes</b><br>
+6,000
+</div>
+
+<div class="stat">
+<b>Saved This Year</b><br>
+$526
+</div>
+</div>
+</div>
+
+<label>Customer Name</label>
+<input id="customerName" value="Scott">
+
+<label>Vacuum Stall Number</label>
+<input id="stallNumber" placeholder="Enter Stall Number">
+
+<label>Notes</label>
+<textarea id="notes"></textarea>
+
+<div class="tiles">
+
+<div class="tile" onclick="selectService(this,'Notify Host')">
+<h3>🔔 Notify Host</h3>
+Immediate assistance request
+</div>
+
+<div class="tile" onclick="selectService(this,'Extra Towels')">
+<h3>🧺 Extra Towels</h3>
+Request fresh towels
+</div>
+
+<div class="tile" onclick="selectService(this,'Glass Cleaner')">
+<h3>🧴 Glass Cleaner</h3>
+Request cleaner
+</div>
+
+<div class="tile" onclick="selectService(this,'Clogged Vacuum')">
+<h3>🌀 Clogged Vacuum</h3>
+Report vacuum issue
+</div>
+
+<div class="tile" onclick="selectService(this,'Lost Item In Vacuum')">
+<h3>🔑 Lost Item</h3>
+Report lost item
+</div>
+
+<div class="tile" onclick="selectService(this,'Report Issue')">
+<h3>📋 Report Issue</h3>
+General issue reporting
+</div>
+
+<div class="tile" onclick="selectService(this,'Feedback')">
+<h3>⭐ Feedback</h3>
+Provide feedback
+</div>
+
+<div class="tile" onclick="window.open('https://www.tidalwaveautospa.com/unlimited-clean-club/','_blank')">
+<h3>💳 Membership Information</h3>
+View Tidal Wave Club Plans
+</div>
+
+</div>
+
+<button onclick="submitRequest()">Submit Request</button>
+
+<div id="success">
+✅ Request Submitted<br><br>
+A Second Mile Host has been notified.
+</div>
+
+</div>
+
+<script>
+
+let selectedService = '';
+
+function selectService(element, service){
+
+    document.querySelectorAll('.tile').forEach(tile=>{
+        tile.classList.remove('selected');
+    });
+
+    element.classList.add('selected');
+
+    selectedService = service;
+}
+
+function submitRequest(){
+
+    if(selectedService === ''){
+        alert('Please select a service.');
+        return;
+    }
+
+    document.getElementById('success').style.display='block';
+
+    console.log({
+        customer: document.getElementById('customerName').value,
+        stall: document.getElementById('stallNumber').value,
+        service: selectedService,
+        notes: document.getElementById('notes').value
+    });
+
+    window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior:'smooth'
+    });
+
+}
+
+</script>
+
+</body>
+</html>
