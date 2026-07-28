@@ -44,6 +44,8 @@ body{
 height:90px;
 }
 
+}
+
 .hero{
     text-align:center;
     color:white;
@@ -214,18 +216,6 @@ textarea{
     width:240px;
 }
 
-@media(max-width:768px){
-
-.hero h1{
-    font-size:38px;
-}
-
-.tile{
-    width:100%;
-}
-
-}
-
 </style>
 </head>
 
@@ -256,7 +246,7 @@ Submit a request and a Second Mile Host will be notified immediately.
 
 <h2>Customer Assistance Portal</h2>
 
-<label>Customer Name</label>
+<label>Customer Name Optional</label>
 <input id="name">
 
 <label>Vacuum Stall Number</label>
@@ -443,3 +433,32 @@ function submitRequest(){
 
 </body>
 </html>
+@media(max-width:768px){
+
+    .logo{
+        height:90px;
+    }
+
+    .hero{
+        padding:30px 15px;
+    }
+
+    .hero h1{
+        font-size:34px;
+        line-height:1.1;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .card{
+        padding:20px;
+    }
+
+    .tile{
+        width:100%;
+        min-height:65px;
+    }
+
+}
