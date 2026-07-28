@@ -34,7 +34,7 @@ url("images.jpg");
 background-size:cover;
 background-position:center;
 color:white;
-padding:80px 20px;
+padding:140px 20px;
 text-align:center;
 }
 
@@ -190,9 +190,23 @@ Submit a request and a Second Mile Host will be notified immediately.
 </div>
 
 <div class="tile"
-onclick="window.open('https://www.tidalwaveautospa.com/unlimited-clean-club/')">
+onclick="window.open('https://www.tidalwaveautospa.com/unlimited-clean-club/','_blank')">
 
 💳 Clean Club Information
+
+</div>
+
+<div class="tile"
+onclick="window.open('https://www.tidalwaveautospa.com/car-wash-fundraiser/','_blank')">
+
+🎓 Fundraising Program
+
+</div>
+
+<div class="tile"
+onclick="window.open('https://www.tidalwaveautospa.com/fleet-plan/','_blank')">
+
+🚚 Fleet Plans
 
 </div>
 
@@ -216,12 +230,6 @@ A Second Mile Host has been notified.
 
 </div>
 
-<div class="footer">
-
-<img
-src="images.jpg"
-style="max-width:700px;width:100%;border-radius:20px;">
-
 <h3>Get Clean Car Happy</h3>
 
 </div>
@@ -230,27 +238,68 @@ style="max-width:700px;width:100%;border-radius:20px;">
 
 <script>
 
-let selected="";
+let selectedRequests = [];
 
 function selectTile(tile,value){
 
-document.querySelectorAll('.tile')
-.forEach(t=>t.classList.remove('selected'));
+    if(selectedRequests.includes(value)){
 
-tile.classList.add('selected');
+        selectedRequests =
+            selectedRequests.filter(item => item !== value);
 
-selected=value;
+        tile.classList.remove('selected');
+
+    }else{
+
+        selectedRequests.push(value);
+
+        tile.classList.add('selected');
+
+    }
 
 }
 
 function submitRequest(){
 
-if(selected===""){
-alert("Please select a request.");
-return;
-}
+    const customerName =
+        document.getElementById("name").value.trim();
 
-document.getElementById("success").style.display="block";
+    const stallNumber =
+        document.getElementById("stall").value.trim();
+
+    const notes =
+        document.getElementById("notes").value.trim();
+
+    if(customerName === ""){
+        alert("Please enter your name.");
+        return;
+    }
+
+    if(stallNumber === ""){
+        alert("Please enter your stall number.");
+        return;
+    }
+
+    if(selectedRequests.length === 0){
+        alert("Please select at least one request.");
+        return;
+    }
+
+    document.getElementById("success").style.display="block";
+
+    console.log({
+
+        Customer: customerName,
+        Stall: stallNumber,
+        Requests: selectedRequests,
+        Notes: notes
+
+    });
+
+    window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth"
+    });
 
 }
 
