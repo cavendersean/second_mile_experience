@@ -1,75 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Second Mile Experience</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Second Mile Experience | Tidal Wave Auto Spa</title>
 
 <style>
 
-body{
+*{
     margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
     font-family:'Segoe UI',sans-serif;
-    background:#f4f7fb;
+
+    background:
+    radial-gradient(circle at 15% 20%, rgba(255,255,255,.35) 0 50px, transparent 55px),
+    radial-gradient(circle at 80% 20%, rgba(255,255,255,.25) 0 80px, transparent 85px),
+    radial-gradient(circle at 10% 80%, rgba(255,255,255,.20) 0 70px, transparent 75px),
+    radial-gradient(circle at 90% 85%, rgba(255,255,255,.30) 0 100px, transparent 105px),
+    linear-gradient(
+        180deg,
+        #dff7ff 0%,
+        #bceeff 40%,
+        #74d8ff 100%
+    );
+
+    min-height:100vh;
     color:#002f87;
 }
 
+/* HEADER */
+
 .header{
     background:white;
-    padding:20px;
-    text-align:center;
-    box-shadow:0 2px 10px rgba(0,0,0,.08);
+    padding:15px 30px;
+    box-shadow:0 2px 15px rgba(0,0,0,.08);
+}
+
+.header-inner{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:20px;
 }
 
 .logo{
-    max-width:220px;
+    height:85px;
 }
 
+.nav{
+    display:flex;
+    gap:25px;
+    flex-wrap:wrap;
+    font-weight:bold;
+}
+
+.nav span{
+    cursor:pointer;
+}
+
+.portal-label{
+    color:#00a6f4;
+}
+
+/* HERO */
+
 .hero{
-    background:linear-gradient(
+    background:
+    linear-gradient(
     135deg,
-    #4b2ea0 0%,
-    #2956cb 50%,
-    #1ac8ff 100%);
-    color:white;
+    rgba(75,46,160,.90),
+    rgba(41,86,203,.90),
+    rgba(26,200,255,.85)
+    ),
+    url("images.jpg");
+
+    background-size:cover;
+    background-position:center;
+
     text-align:center;
-    padding:80px 20px;
+    color:white;
+
+    padding:100px 20px;
 }
 
 .hero h1{
-    font-size:54px;
-    margin-bottom:15px;
+    font-size:58px;
+    margin-bottom:20px;
 }
 
 .hero p{
-    font-size:22px;
-    max-width:700px;
+    font-size:24px;
+    max-width:750px;
     margin:auto;
+    line-height:1.6;
 }
+
+/* MAIN */
 
 .container{
     max-width:1200px;
     margin:auto;
-    margin-top:-70px;
+    margin-top:-60px;
     padding:20px;
 }
 
 .card{
     background:white;
-    border-radius:25px;
-    padding:35px;
-    box-shadow:0 10px 25px rgba(0,0,0,.15);
+    border-radius:30px;
+    padding:40px;
+    box-shadow:0 15px 35px rgba(0,47,135,.15);
 }
 
-.section-title{
+/* INFO BOX */
+
+.info-box{
+    background:#eef9ff;
+    border-radius:20px;
+    padding:25px;
     text-align:center;
-    margin-bottom:25px;
+    margin-bottom:30px;
 }
 
-.section-title h2{
-    margin:0;
+.info-box h3{
+    margin-bottom:20px;
+}
+
+.steps{
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+    justify-content:center;
+}
+
+.step{
+    background:white;
+    border-radius:12px;
+    padding:12px 16px;
+    font-weight:bold;
+}
+
+/* FORM */
+
+h2{
+    text-align:center;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    text-align:center;
+    margin-bottom:30px;
+    color:#5376a8;
 }
 
 label{
@@ -79,238 +166,73 @@ label{
 }
 
 input,
-textarea,
-select{
+textarea{
     width:100%;
-    padding:14px;
     margin-top:8px;
-    border-radius:10px;
-    border:1px solid #d9dce4;
-    box-sizing:border-box;
+    padding:15px;
+    border-radius:12px;
+    border:1px solid #cfd9e7;
+    font-size:16px;
 }
+
+textarea{
+    resize:vertical;
+}
+
+/* TILES */
 
 .tiles{
     margin-top:30px;
+
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:15px;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:20px;
 }
 
 .tile{
-    background:#f4f7fb;
+    background:#f8fbff;
     border:2px solid transparent;
-    padding:20px;
-    border-radius:16px;
+
+    border-radius:20px;
+    padding:30px;
+
+    min-height:150px;
+
     cursor:pointer;
+
     transition:.2s;
 }
 
 .tile:hover{
-    border-color:#2ea7ff;
+    border-color:#00a6f4;
+    transform:translateY(-3px);
 }
 
 .tile.selected{
-    border-color:#2ea7ff;
-    background:#e8f7ff;
+    background:#e5f7ff;
+    border-color:#00a6f4;
 }
 
 .tile h3{
-    margin-top:0;
-    margin-bottom:10px;
+    margin-bottom:12px;
 }
+
+.tile p{
+    line-height:1.4;
+}
+
+/* BUTTON */
 
 .submit-btn{
-    margin-top:30px;
     width:100%;
+
+    margin-top:30px;
+
     background:#002f87;
-    border:none;
     color:white;
-    font-size:18px;
-    font-weight:bold;
-    padding:18px;
-    border-radius:12px;
-    cursor:pointer;
-}
 
-.submit-btn:hover{
-    background:#0048c8;
-}
+    border:none;
 
-.success{
-    display:none;
-    margin-top:20px;
-    background:#e5f7ea;
-    border-left:6px solid #1f9d55;
-    color:#146a38;
     padding:20px;
-    border-radius:12px;
-}
 
-.footer{
-    margin-top:60px;
-    text-align:center;
-    padding:30px;
-    color:#666;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="header">
-
-<h2>TIDAL WAVE AUTO SPA</h2>
-
-<div style="color:#2ea7ff;font-weight:bold;">
-SECOND MILE EXPERIENCE
-</div>
-
-</div>
-
-<div class="hero">
-
-<h1>Need Assistance Today?</h1>
-
-<p>
-Submit a request and a Second Mile Host will be notified.
-</p>
-
-</div>
-
-<div class="container">
-
-<div class="card">
-
-<div class="section-title">
-
-<h2>Customer Assistance Portal</h2>
-
-<p>
-How can we help today?
-</p>
-
-</div>
-
-<label>Customer Name</label>
-<input id="name">
-
-<label>Vacuum Stall Number</label>
-<input id="stall">
-
-<label>Additional Notes</label>
-<textarea id="notes"></textarea>
-
-<div class="tiles">
-
-<div class="tile" onclick="selectTile(this,'Extra Towels')">
-<h3>🧺 Extra Towels</h3>
-Request fresh towels.
-</div>
-
-<div class="tile" onclick="selectTile(this,'Glass Cleaner')">
-<h3>🧴 Glass Cleaner</h3>
-Request cleaner.
-</div>
-
-<div class="tile" onclick="selectTile(this,'Clogged Vacuum')">
-<h3>🌀 Clogged Vacuum</h3>
-Vacuum is not working correctly.
-</div>
-
-<div class="tile" onclick="selectTile(this,'Lost Item In Vacuum')">
-<h3>🔑 Lost Item</h3>
-I believe an item was lost in the vacuum.
-</div>
-
-<div class="tile" onclick="selectTile(this,'Report Issue')">
-<h3>📋 Report Issue</h3>
-Something needs attention.
-</div>
-
-<div class="tile" onclick="selectTile(this,'Feedback')">
-<h3>⭐ Feedback</h3>
-Share your experience.
-</div>
-
-<div class="tile" onclick="window.open('https://www.tidalwaveautospa.com/unlimited-clean-club/')">
-<h3>💳 Membership Information</h3>
-View Clean Club information.
-</div>
-
-</div>
-
-<button class="submit-btn" onclick="submitRequest()">
-
-SUBMIT REQUEST
-
-</button>
-
-<div id="success" class="success">
-
-✅ Request Submitted
-
-<br><br>
-
-A Second Mile Host has been notified.
-
-</div>
-
-</div>
-
-<div class="footer">
-
-Second Mile Experience Demo
-
-</div>
-
-</div>
-
-<script>
-
-let selectedRequest="";
-
-function selectTile(tile,request){
-
-document.querySelectorAll('.tile').forEach(t=>{
-t.classList.remove('selected');
-});
-
-tile.classList.add('selected');
-
-selectedRequest=request;
-
-}
-
-function submitRequest(){
-
-if(selectedRequest===""){
-
-alert("Please select a request.");
-
-return;
-
-}
-
-document.getElementById("success").style.display="block";
-
-console.log({
-Customer:document.getElementById("name").value,
-Stall:document.getElementById("stall").value,
-Request:selectedRequest,
-Notes:document.getElementById("notes").value
-});
-
-window.scrollTo({
-top:document.body.scrollHeight,
-behavior:'smooth'
-});
-
-}
-
-</script>
-
-</body>
-</html>
-``
+    font
