@@ -415,6 +415,8 @@ alt="Catch The Happy Wave">
 
 <script>
 
+const FLOW_URL = "https://default593118bab0ab4364a697a7c352dff5.81.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/19/workflows/96596c4403ee4750b360c7adb0f68b79/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=S6Q-Yi4AA2yFvDSKFIraURy-SNhpmD_4S5zdx6zlRow";
+
 let selectedRequests = [];
 
 function selectTile(tile,value){
@@ -437,7 +439,27 @@ function selectTile(tile,value){
 
 }
 
-function submitRequest(){
+function getProgramLinks(){
+
+    const links = [];
+
+    if(selectedRequests.includes("Clean Club Information")){
+        links.push("https://www.tidalwaveautospa.com/unlimited-clean-club/");
+    }
+
+    if(selectedRequests.includes("Fundraising Program")){
+        links.push("https://www.tidalwaveautospa.com/car-wash-fundraiser/");
+    }
+
+    if(selectedRequests.includes("Fleet Plans")){
+        links.push("https://www.tidalwaveautospa.com/fleet-plan/");
+    }
+
+    return links;
+
+}
+
+async function submitRequest(){
 
     const customerName =
         document.getElementById("name").value.trim();
@@ -458,42 +480,76 @@ function submitRequest(){
         return;
     }
 
-    document.getElementById("success").style.display="block";
+    const payload = {
+        eventType: "request_submitted",
+        customerName: customerName || "Not Provided",
+        stallNumber: stallNumber,
+        requestType: selectedRequests.join(", "),
+        notes: notes || "None",
+        pageUrl: window.location.href,
+        submittedAt: new Date().toISOString()
+    };
 
-    console.log({
-        Customer: customerName || "Not Provided",
-        Stall: stallNumber,
-        Requests: selectedRequests,
-        Notes: notes
-    });
-    // Open program links AFTER submission
+    try{
 
-if(selectedRequests.includes("Clean Club Information")){
+        await fetch(FLOW_URL,{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify(payload)
+        });
 
-    window.open(
-        "https://www.tidalwaveautospa.com/unlimited-clean-club/",
-        "_blank"
-    );
+        document.getElementById("success").style.display="block";
 
-}
+        const programLinks = getProgramLinks();
 
-if(selectedRequests.includes("Fundraising Program")){
+        programLinks.forEach(link => {
+            window.open(link,"_blank");
+        });
 
-    window.open(
-        "https://www.tidalwaveautospa.com/car-wash-fundraiser/",
-        "_blank"
-    );
+        window.scrollTo({
+            top:document.body.scrollHeight,
+            behavior:"smooth"
+        });
 
-}
+    }catch(error){
 
-if(selectedRequests.includes("Fleet Plans")){
+        console.warn("Standard submission failed. Trying backup submission.", error);
 
-    window.open(
-        "https://www.tidalwaveautospa.com/fleet-plan/",
-        "_blank"
-    );
+        try{
 
-}
+            await fetch(FLOW_URL,{
+                method:"POST",
+                mode:"no-cors",
+                headers:{
+                    "Content-Type":"text/plain"
+                },
+                body:JSON.stringify(payload)
+            });
+
+            document.getElementById("success").style.display="block";
+
+            const programLinks = getProgramLinks();
+
+            programLinks.forEach(link => {
+                window.open(link,"_blank");
+            });
+
+            window.scrollTo({
+                top:document.body.scrollHeight,
+                behavior:"smooth"
+            });
+
+        }catch(fallbackError){
+
+            console.error("Submission failed.", fallbackError);
+
+            alert("Submission failed. Please notify a team member.");
+
+        }
+
+    }
 
 }
 
