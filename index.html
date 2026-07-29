@@ -442,11 +442,6 @@ function submitRequest(){
     const notes =
         document.getElementById("notes").value.trim();
 
-    if(customerName === ""){
-        alert("Please enter your name.");
-        return;
-    }
-
     if(stallNumber === ""){
         alert("Please enter your stall number.");
         return;
@@ -460,7 +455,7 @@ function submitRequest(){
     document.getElementById("success").style.display="block";
 
     console.log({
-        Customer: customerName,
+        Customer: customerName || "Not Provided",
         Stall: stallNumber,
         Requests: selectedRequests,
         Notes: notes
