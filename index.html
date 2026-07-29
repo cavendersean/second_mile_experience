@@ -355,21 +355,21 @@ Learn more about Tidal Wave programs and opportunities.
 <div class="info-row">
 
 <div class="tile"
-onclick="window.open('https://www.tidalwaveautospa.com/unlimited-clean-club/','_blank')">
+onclick="selectTile(this,'Clean Club Information')"
 
 💳 Clean Club Information
 
 </div>
 
 <div class="tile"
-onclick="window.open('https://www.tidalwaveautospa.com/car-wash-fundraiser/','_blank')">
+onclick="selectTile(this,'Fundraising Program')"
 
 🎓 Fundraising Program
 
 </div>
 
 <div class="tile"
-onclick="window.open('https://www.tidalwaveautospa.com/fleet-plan/','_blank')">
+onclick="selectTile(this,'Fleet Plans')"
 
 🚚 Fleet Plans
 
@@ -460,6 +460,34 @@ function submitRequest(){
         Requests: selectedRequests,
         Notes: notes
     });
+    // Open program links AFTER submission
+
+if(selectedRequests.includes("Clean Club Information")){
+
+    window.open(
+        "https://www.tidalwaveautospa.com/unlimited-clean-club/",
+        "_blank"
+    );
+
+}
+
+if(selectedRequests.includes("Fundraising Program")){
+
+    window.open(
+        "https://www.tidalwaveautospa.com/car-wash-fundraiser/",
+        "_blank"
+    );
+
+}
+
+if(selectedRequests.includes("Fleet Plans")){
+
+    window.open(
+        "https://www.tidalwaveautospa.com/fleet-plan/",
+        "_blank"
+    );
+
+}
 
 }
 
